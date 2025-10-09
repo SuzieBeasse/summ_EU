@@ -5,3 +5,10 @@ pylint:
 
 pytest:
     PYTHONDONTWRITEBYTECODE=1 pytest -v --color=yes
+
+#################### PACKAGE ACTIONS ###################
+run_api:
+	uvicorn backend_summeu.api.fast:app --reload
+reinstall_package:
+	@pip uninstall -y backend_summeu || :
+	@pip install -e .
