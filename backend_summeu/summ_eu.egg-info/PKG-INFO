@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: summ_eu
+Version: 0.0.12
+Summary: Summ_EU backend (api_pred)
+Home-page: https://github.com/SuzieBeasse/summ_EU
+Author: Suzie Béasse
+Author-email: beasse.suzie@gmail.com
+License: MIT
+Requires-Dist: langchain
+Requires-Dist: langchain_chroma
+Requires-Dist: langchain_text_splitters
+Requires-Dist: langchain_community
+Requires-Dist: python-dotenv
+Requires-Dist: colorama
+Requires-Dist: google-cloud-storage
+Requires-Dist: google-api-core
+Requires-Dist: googleapis-common-protos
+Requires-Dist: fastapi
+Requires-Dist: pytz
+Requires-Dist: uvicorn
+Requires-Dist: httpx
+Requires-Dist: pytest-asyncio
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary

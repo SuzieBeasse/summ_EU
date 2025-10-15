@@ -40,7 +40,7 @@ def answer_filtered(query, vector_store, llm, prompt_template=None, session_year
     return answer.content
 
 # Test the function
-if __name__ == "__main__":
-    vector_store =load_vector_store()
-    query = "Summarize the discussion on water quality"
-    print(answer_filtered(query, vector_store, MODEL))
+# if __name__ == "__main__":
+#     vector_store =load_vector_store()
+#     query = "Summarize the discussion on water quality"
+#     print(answer_filtered(query, vector_store, MODEL))

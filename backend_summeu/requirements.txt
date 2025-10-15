@@ -1,16 +1,15 @@
 langchain
+langchain-google-genai
 langchain_chroma
+chromadb
 langchain_text_splitters
 langchain_community
-
 python-dotenv
 colorama
+google-cloud-storage
+google-api-core
+googleapis-common-protos
 
-
-google-cloud-bigquery
-google-cloud-storage==2.14.0
-google-api-core==2.8.2
-googleapis-common-protos==1.56.4
 # API
 fastapi         # API framework
 pytz            # time zone management
