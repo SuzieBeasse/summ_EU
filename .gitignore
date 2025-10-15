@@ -3,6 +3,6 @@ notebooks
 backend_summeu/notebooks/chroma_ep_follower/chroma.sqlite3
 backend_summeu/notebooks/chroma_ep_follower/0c8f32ed-6839-44eb-8238-36d06aafe9c3
 .env
-.env.yaml
+
 .envrc
 chroma
