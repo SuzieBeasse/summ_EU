@@ -1,28 +1,30 @@
 import getpass
 import os
 from langchain import hub
-
+import chromadb
+from backend_summeu.params import PERSIST_DIR, EMBEDDINGS, MODEL, COLLECTION_NAME
 if not os.environ.get("GOOGLE_API_KEY"):
   os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
 
-from langchain.chat_models import init_chat_model
-
-model = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
+def load_vector_store():
+    client = chromadb.PersistentClient(path = str(PERSIST_DIR))
+    collection = client.get_collection(COLLECTION_NAME)
+    print(f"✅ Loaded collection: {COLLECTION_NAME}")
+    return collection
 
 def answer_filtered(query, vector_store, llm, prompt_template=None, session_year = 2025, session_month = None):
     """Answer a query using the vector store and the language model."""
     # Retrieve similar documents from the vector store
-    if session_month:
-        filter = {"$and":[{"session_year": {"$eq": session_year}},
-                  {"session_month": {"$eq": session_month}}]
-                }
-        retrieved_docs = vector_store.similarity_search(query, k=6, filter=filter)
-    else:
-        filter = {"session_year": session_year}
-        retrieved_docs = vector_store.similarity_search(query, k=6, filter=filter)
+    embedded_query = EMBEDDINGS.embed_query(query)
+
+    retrieved_docs = vector_store.query(
+        query_embeddings=[embedded_query],
+        n_results=6
+    )
+
 
     # Create the prompt
-    docs_content = "\n\n".join(doc.page_content for doc in retrieved_docs)
+    docs_content = "\n\n".join(retrieved_docs['documents'][0])
 
     # If no prompt template is provided, use the default one
     if not prompt_template:
@@ -36,3 +38,9 @@ def answer_filtered(query, vector_store, llm, prompt_template=None, session_year
     answer = llm.invoke(prompt)
 
     return answer.content
+
+# Test the function
+if __name__ == "__main__":
+    vector_store =load_vector_store()
+    query = "Summarize the discussion on water quality"
+    print(answer_filtered(query, vector_store, MODEL))
