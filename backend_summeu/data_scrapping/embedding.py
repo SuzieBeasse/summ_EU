@@ -1,12 +1,14 @@
 # Import the necessary libraries
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
+import chromadb
 from langchain import hub
 import getpass
 import os
 from pathlib import Path
 from langchain_community.document_loaders import PyPDFLoader
-from backend_summeu.params import EMBEDDINGS, LOCAL_DATA_PATH
+from backend_summeu.params import EMBEDDINGS, LOCAL_DATA_PATH, PERSIST_DIR
+from backend_summeu.data_scrapping.fetch_cre import scrap_all_id_list
 
 def create_vector_store():
     vector_store_c = Chroma(
@@ -49,3 +51,16 @@ def embed_and_store_fancy(file_path, vector_store, session_date):
     document_ids = vector_store.add_documents(documents=all_splits)
 
     return document_ids
+
+if __name__ == "__main__":
+    vector_store = chromadb.PersistentClient(path=PERSIST_DIR)
+    query = "Summarize the discussion on water quality"
+  
+
+    # id_list = scrap_all_id_list()
+
+    # for i, id in enumerate(id_list):
+        # data_path = Path(LOCAL_DATA_PATH).joinpath(f'EP/{id}_EN.pdf')
+        # session_date = id[-10:]
+        # embed_and_store_fancy(data_path, vector_store, session_date)
+        # print(f"File {i}/{len(id_list)} embedded")

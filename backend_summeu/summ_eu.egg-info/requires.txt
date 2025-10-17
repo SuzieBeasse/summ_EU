@@ -1,0 +1,14 @@
+langchain
+langchain_chroma
+langchain_text_splitters
+langchain_community
+python-dotenv
+colorama
+google-cloud-storage
+google-api-core
+googleapis-common-protos
+fastapi
+pytz
+uvicorn
+httpx
+pytest-asyncio

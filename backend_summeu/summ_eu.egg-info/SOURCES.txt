@@ -1,0 +1,13 @@
+setup.py
+api/__init__.py
+api/fast.py
+data_scrapping/__init__.py
+data_scrapping/answer_query.py
+data_scrapping/embedding.py
+data_scrapping/fetch_cre.py
+summ_eu.egg-info/PKG-INFO
+summ_eu.egg-info/SOURCES.txt
+summ_eu.egg-info/dependency_links.txt
+summ_eu.egg-info/not-zip-safe
+summ_eu.egg-info/requires.txt
+summ_eu.egg-info/top_level.txt
