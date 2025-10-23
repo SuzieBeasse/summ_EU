@@ -1,4 +1,4 @@
-FROM python:3.12.9-slim
+FROM python:3.12.9-bookworm
 
 COPY backend_summeu/requirements.txt /requirements.txt
 COPY backend_summeu /backend_summeu

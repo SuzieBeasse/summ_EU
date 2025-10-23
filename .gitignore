@@ -6,3 +6,18 @@ backend_summeu/notebooks/chroma_ep_follower/0c8f32ed-6839-44eb-8238-36d06aafe9c3
 .env.yaml
 .envrc
 chroma
+
+# Credentials (or files with potentially credentials inside)
+.env
+.credentials
+secrets.toml
+*.json
+
+# Standard python ignores
+*.egg-info
+.coverage
+.ipynb_checkpoints
+**/__pycache__/
+.python-version
+*.pyc
+**/build
