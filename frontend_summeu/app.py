@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import requests
 
 st.set_page_config(
     page_title="summ_eu", # => Quick reference - Streamlit
@@ -18,10 +19,14 @@ st.sidebar.markdown(f"""
                     Enter a question about European debates and politics to get started
 
                     """)
+# Url API
+url_query = "https://summeu-276701461247.europe-west1.run.app/query_vs"
+
 
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
@@ -30,17 +35,27 @@ for message in st.session_state.messages:
 
 
 # React to user input
-if prompt := st.chat_input("What were the latest environmental policies discussed?"):
+if prompt := st.chat_input("Ask your question about EU debates here"):
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
+    # Query summeu with user input
+    try:
+        st.session_state.response = requests.get(
+            url_query,
+            params={"query": prompt}
+        ).json()
+    except:
+        st.markdown("Hoho something went wrong")
 
-response = "" # Needs to be the response from the API
+
 
 # Display assistant response in chat message container
 with st.chat_message("assistant"):
-    st.markdown(response)
-# Add assistant response to chat history
-st.session_state.messages.append({"role": "assistant", "content": response})
+    if "response" in st.session_state:
+        st.markdown(st.session_state.response['answer'])
+
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": st.session_state.response['answer']})
