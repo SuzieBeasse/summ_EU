@@ -32,7 +32,7 @@ docker_run_local_interactively:
 		bash
 
 docker_build:
-	docker build \
+	docker buildx build \
 	--platform linux/amd64 \
 	-t ${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT}/${GAR_REPO}/${GAR_IMAGE}:prod .
 
